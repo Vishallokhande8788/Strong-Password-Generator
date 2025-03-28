@@ -57,12 +57,96 @@ const calculateStrength = (pass) => {
   } else {
     setStrength("Strong");
   }
+  
 };
+// Add to App component
+const copyPasswordToClipboard = useCallback(() => {
+  passwordRef.current?.select();
+  passwordRef.current?.setSelectionRange(0, 999);
+  window.navigator.clipboard.writeText(password);
+  setCopied(true);
+  setTimeout(() => setCopied(false), 2000);
+}, [password]);
 
-  return (
-    <div className="app-container">
+// Add this useEffect for auto-generation
+useEffect(() => {
+  passwordGenerator();
+}, [length, numberAllowed, charAllowed, passwordGenerator]);
+
+  // Add to return statement
+return (
+  <div className="relative w-full min-h-screen flex justify-center items-center p-5 bg-slate-900 overflow-hidden">
+    {/* Main Card Container */}
+    <div className="relative z-10 w-full max-w-md bg-slate-800 bg-opacity-80 backdrop-blur-md rounded-xl p-8 shadow-xl border border-white border-opacity-10 animate-fade-in">
+      <h1 className="text-2xl font-bold text-center mb-2 bg-gradient-to-r from-indigo-500 to-blue-300 bg-clip-text text-transparent">
+        Password Generator
+      </h1>
+      
+      {/* Password Display */}
+      <div className={`flex mb-6 rounded-lg overflow-hidden transition-all duration-300 ${copied ? 'ring-2 ring-emerald-500' : ''}`}>
+        <input
+          type="text"
+          value={password}
+          className="flex-1 px-4 py-3 bg-slate-900 bg-opacity-50 text-white outline-none"
+          placeholder="Generating..."
+          readOnly
+          ref={passwordRef}
+        />
+        <button
+          onClick={copyPasswordToClipboard}
+          className={`px-4 font-medium transition-colors duration-300 ${copied ? 'bg-emerald-600 text-white' : 'bg-indigo-600 hover:bg-indigo-700 text-white'}`}
+        >
+          {copied ? "✓" : "Copy"}
+        </button>
+      </div>
+
+      {/* Controls Section */}
+      <div className="space-y-5 mb-6">
+        {/* Length Slider */}
+        <div>
+          <input
+            type="range"
+            min="4"
+            max="32"
+            value={length}
+            onChange={(e) => setLength(e.target.value)}
+            className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer"
+          />
+        </div>
+
+        {/* Toggle Switches */}
+        <div className="flex gap-4">
+          {/* Number toggle */}
+          <label className="toggle-switch">
+            <input
+              type="checkbox"
+              checked={numberAllowed}
+              onChange={() => setNumberAllowed(!numberAllowed)}
+            />
+            <span>Numbers</span>
+          </label>
+
+          {/* Special chars toggle */}
+          <label className="toggle-switch">
+            <input
+              type="checkbox"
+              checked={charAllowed}
+              onChange={() => setCharAllowed(!charAllowed)}
+            />
+            <span>Special Chars</span>
+          </label>
+        </div>
+      </div>
+
+      <button
+        onClick={passwordGenerator}
+        className="generate-button"
+      >
+        Generate Password
+      </button>
     </div>
-  );
+  </div>
+);
 }
 
 export default App;
