@@ -6,8 +6,9 @@ Here’s a clean and professional `README.md` for your **Strong Password Generat
 
 A responsive React application that generates strong, customizable passwords with real-time strength analysis and one-click copy functionality. Built using **React**, **Tailwind CSS**, and **Vite** with animated background particles for a visually appealing UI.
 
-### 🌐 [Live Demo](https://strongpasswordgenerator8788.netlify.app/)  
-*(Deployed on Netlify)*
+### 🌐 [Live Demo](https://strongpasswordgenerator8788.netlify.app/)
+
+_(Deployed on Netlify)_
 
 ---
 
@@ -63,7 +64,9 @@ pnpm run dev
 
 ## 🖥️ Screenshots
 
-<img src="https://user-images.githubusercontent.com/placeholder/screenshot1.png" alt="App Screenshot" width="600" />
+
+
+![](./public/passwordgenerator.png)
 
 ---
 
@@ -76,12 +79,12 @@ Password strength is calculated based on:
 - Unique characters – max 20 points
 
 **Total Score → Strength:**
+
 - 0–39: Weak 🔴
 - 40–69: Medium 🟡
 - 70–100: Strong 🟢
 
 ---
-
 
 ## 📜 License
 
